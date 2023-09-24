@@ -53,7 +53,7 @@ const _nav = [
   {
     component: CNavItem,
     name: 'Выбор активностей',
-    to: '/interviews',
+    to: '/activity',
     icon: <CIcon icon={cilBraille} customClassName="nav-icon" />,
     badge: {
       color: '',

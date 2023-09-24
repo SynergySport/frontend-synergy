@@ -74,7 +74,7 @@ class App extends Component {
     };
 
     if (this.isAuth()) {
-      headers["Authorization"] = `Bearer ${this.cook.get('access')}`;
+      headers["Authorization"] = `Token ${this.cook.get('access')}`;
     }
     return headers;
   };
