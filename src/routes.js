@@ -2,6 +2,7 @@ import React from 'react'
 
 const Profile = React.lazy(() => import('./views/profile/Pofile'))
 const Events = React.lazy(() => import('./views/events/Event'))
+const Activity = React.lazy(() => import('./views/activity/Activity'))
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const Mergeflow = React.lazy(() => import('./views/mergeflow/Mergeflow'))
 const Tests = React.lazy(() => import('./views/tests/Tests'))
@@ -58,6 +59,7 @@ const routes = [
   { path: '/', exact: true, name: 'Главная' },
   { path: '/profile', name: 'Мой профиль', element: Profile },
   { path: '/events', name: 'События', element: Events },
+  { path: '/activity', name: 'Виды активностей', element: Activity },
   { path: '/dashboard', name: 'Сводная аналитика', element: Dashboard },
   { path: '/tools/mergeflow', name: 'Маршруты собеседований', element: Mergeflow },
   { path: '/tools/tests', name: 'Tests', element: Tests },
