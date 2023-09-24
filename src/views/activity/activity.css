@@ -1,0 +1,6 @@
+.card_activity:hover {
+   transform: scale(1.1); 
+   margin-left: 20px;
+   margin-top: 15px;
+   transition: transform .5s, margin-left .5s;
+}

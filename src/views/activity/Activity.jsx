@@ -10,7 +10,13 @@ import {
     CButton,
     CCard,
     CCardBody,
+    CCardImage,
     CCardHeader,
+    CCardTitle,
+    CCardText,
+    CListGroup,
+    CListGroupItem,
+    CCardLink,
     CCol,
     CDatePicker,
     CBadge,
@@ -81,6 +87,10 @@ import { getFormatDate } from '../../utils/datetime.js';
 
 // import { every } from 'core-js/core/array'
 
+import './activity.css'
+
+
+
 
 // сервис для работы с API
 const serviceApiPromise = (method = 'get', full_url = '', data = {}, headers = {}) => {
@@ -100,7 +110,8 @@ const Activity = (props) => { // настройки приложения
 
     // Event data list
     const [activityDataList, setActivityDataList] = useState([{
-        user: []
+        user: [],
+        user_data: []
     }]);
 
 
@@ -179,7 +190,7 @@ const Activity = (props) => { // настройки приложения
                                     }
                                 }>
                                     <CButton className='btn btn-secondary btn-sm'
-                                        onClick={handleButtonCreateEvent}>+ Добавить событие</CButton>
+                                        onClick={handleButtonCreateEvent}>+ Добавить активность</CButton>
                                 </div>
 
                             </CForm>
@@ -219,7 +230,45 @@ const Activity = (props) => { // настройки приложения
                                 <div class="tab-pane fade show active" id="favorite" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0"></div>
                                 <div class="tab-pane fade" id="all" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0"></div>
                             </div>
-                            {/* Таблица с данными */}
+                            {/* Карточки с данными */}
+                            <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', flexWrap: 'wrap' }}>
+                                {activityDataList.map((item) =>
+                                    <div>
+                                        <CCard className='card_activity' style={{ width: '25rem', height: '600px', marginTop: '10px' }}>
+                                            <CCardImage orientation="top" src={item.logo} style={{ height: '150px', width: '150px' }} />
+                                            <CCardBody>
+                                                <CCardTitle>{item.title}</CCardTitle>
+                                                <CCardText style={{ height: '50px' }}>
+                                                    {item.description}
+                                                </CCardText>
+                                            </CCardBody>
+                                            <CListGroup flush>
+                                                <CListGroupItem>Единица измерения: {item.unit}</CListGroupItem>
+                                                <CListGroupItem>Стоимость в условных единицах: {item.cost_unit}</CListGroupItem>
+                                                <CListGroupItem>Количество участников: {item.user.length}
+                                                    {item.user_data.map((user) => <div>{user.first_name}</div>)}
+                                                </CListGroupItem>
+                                                <CListGroupItem>Участники: {item.user.length}
+                                                    <div style={{ display: 'flex', flexDirection: 'row', gap: '5px', flexWrap: 'wrap' }}>
+                                                        {item.user_data.map((user) => <div>
+                                                            <CAvatar src={user.avatar} status="success" />
+                                                            {/* {user.first_name} */}
+                                                        </div>)}
+                                                    </div>
+                                                </CListGroupItem>
+                                            </CListGroup>
+                                            <CCardBody>
+                                                <CCardLink href="#">Добавить в избранное</CCardLink>
+                                                <CCardLink href="#">Мои коллеги</CCardLink>
+                                            </CCardBody>
+                                        </CCard>
+                                    </div>
+                                )
+                                }
+                            </div>
+
+
+
 
                         </CCardBody>
                     </CCard>
