@@ -130,7 +130,7 @@ const Events = (props) => { // настройки приложения
     }
 
     const dataEvents = async (status = null) => {
-        const url = status ? `/api/events/?status=${status}` : `/api/events/`;
+        const url = status ? `/api/events/all/?status=${status}` : `/api/events/all/`;
         const data = await loadData(url);
         setEventsDataList(data);
     }

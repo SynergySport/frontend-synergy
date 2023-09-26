@@ -87,6 +87,8 @@ import { getFormatDate } from '../../utils/datetime.js';
 
 // import { every } from 'core-js/core/array'
 
+import { ActivityCard } from './ActivityCard/ActivityCard';
+
 import './activity.css'
 
 
@@ -141,7 +143,7 @@ const Activity = (props) => { // настройки приложения
     }
 
     const dataActivity = async (status = null) => {
-        const url = status ? `/api/activity/?status=${status}` : `/api/activity/`;
+        const url = status ? `/api/activity/list/?status=${status}` : `/api/activity/`;
         const data = await loadData(url);
         setActivityDataList(data);
     }
@@ -234,42 +236,12 @@ const Activity = (props) => { // настройки приложения
                             <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', flexWrap: 'wrap' }}>
                                 {activityDataList.map((item) =>
                                     <div>
-                                        <CCard className='card_activity' style={{ width: '25rem', height: '600px', marginTop: '10px' }}>
-                                            <CCardImage orientation="top" src={item.logo} style={{ height: '150px', width: '150px' }} />
-                                            <CCardBody>
-                                                <CCardTitle>{item.title}</CCardTitle>
-                                                <CCardText style={{ height: '50px' }}>
-                                                    {item.description}
-                                                </CCardText>
-                                            </CCardBody>
-                                            <CListGroup flush>
-                                                <CListGroupItem>Единица измерения: {item.unit}</CListGroupItem>
-                                                <CListGroupItem>Стоимость в условных единицах: {item.cost_unit}</CListGroupItem>
-                                                <CListGroupItem>Количество участников: {item.user.length}
-                                                    {item.user_data.map((user) => <div>{user.first_name}</div>)}
-                                                </CListGroupItem>
-                                                <CListGroupItem>Участники: {item.user.length}
-                                                    <div style={{ display: 'flex', flexDirection: 'row', gap: '5px', flexWrap: 'wrap' }}>
-                                                        {item.user_data.map((user) => <div>
-                                                            <CAvatar src={user.avatar} status="success" />
-                                                            {/* {user.first_name} */}
-                                                        </div>)}
-                                                    </div>
-                                                </CListGroupItem>
-                                            </CListGroup>
-                                            <CCardBody>
-                                                <CCardLink href="#">Добавить в избранное</CCardLink>
-                                                <CCardLink href="#">Мои коллеги</CCardLink>
-                                            </CCardBody>
-                                        </CCard>
+                                        <ActivityCard item={item} />
+
                                     </div>
                                 )
                                 }
                             </div>
-
-
-
-
                         </CCardBody>
                     </CCard>
                 </CCol>
