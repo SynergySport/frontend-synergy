@@ -77,36 +77,42 @@ import {
 
 } from '@coreui/icons'
 
+import './ActivityCard.css'
+
 
 export const ActivityCard = ({ item }) => {
     return (
-        <CCard className='card_activity' style={{ width: '25rem', height: '600px', marginTop: '10px' }}>
-            <CCardImage orientation="top" src={item.logo} style={{ height: '150px', width: '150px' }} />
+        <CCard className='card_activity' style={{ width: '30rem', height: '600px', marginTop: '10px' }}>
+            <div>
+                <CCardImage orientation="top" src={item.logo} style={{ height: '250px' }} />
+            </div>
+
             <CCardBody>
+
                 <CCardTitle>{item.title}</CCardTitle>
-                <CCardText style={{ height: '50px' }}>
+                <CCardText className='description-activity' style={{ height: '80px', overflowX: 'hidden', overflowY: 'auto' }}>
                     {item.description}
                 </CCardText>
             </CCardBody>
             <CListGroup flush>
-                <CListGroupItem>Единица измерения: {item.unit}</CListGroupItem>
-                <CListGroupItem>Стоимость в условных единицах: {item.cost_unit}</CListGroupItem>
-                <CListGroupItem>Количество участников: {item.user.length}
-                    {item.user_data.map((user) => <div>{user.first_name}</div>)}
+                <CListGroupItem style={{ display: 'flex', flexDirection: 'column' }}>
+                    <span className='title-small-info '>Единица измерения: {item.unit_txt}</span>
+                    <span className='title-small-info '>Стоимость единицы: {item.cost_unit}</span>
                 </CListGroupItem>
-                <CListGroupItem>Участники: {item.user.length}
+                <CListGroupItem>
+                    <span className='title-small-info'>Участники: {item.user.length}</span>
                     <div style={{ display: 'flex', flexDirection: 'row', gap: '5px', flexWrap: 'wrap' }}>
-                        {item.user_data.map((user) => <div>
+                        {item.user_data.slice(0, 5).map((user) => <div>
                             <CAvatar src={user.avatar} status="success" />
                             {/* {user.first_name} */}
-                        </div>)}
+                        </div>)} + {item.user.length - item.user_data.slice(0, 5).length}
                     </div>
                 </CListGroupItem>
+
             </CListGroup>
-            <CCardBody>
+            {/* <CCardBody>
                 <CCardLink href="#">Добавить в избранное</CCardLink>
-                <CCardLink href="#">Мои коллеги</CCardLink>
-            </CCardBody>
-        </CCard>
+            </CCardBody> */}
+        </CCard >
     );
 }
