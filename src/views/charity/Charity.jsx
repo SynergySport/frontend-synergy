@@ -87,9 +87,9 @@ import { getFormatDate } from '../../utils/datetime.js';
 
 // import { every } from 'core-js/core/array'
 
-import { ActivityCard } from './ActivityCard/ActivityCard';
+import { CharityCard } from './CharityCard/CharityCard';
 
-import './activity.css'
+import './charity.css'
 
 
 
@@ -101,19 +101,19 @@ const serviceApiPromise = (method = 'get', full_url = '', data = {}, headers = {
 
 
 
-const Activity = (props) => { // настройки приложения
+const Charity = (props) => { // настройки приложения
     const { startUrlApi, userData, getHeaders } = useContext(AppContext);
     const [modalEventVisible, setModalEventVisible] = useState(false);
 
     // описание триггеров для бизнес логики
     const [inputSearch, setInputSearch] = useState('');
     // статус события
-    const [statusActivity, setStatusActivity] = useState('favorite');
+    const [statusCharity, setStatusCharity] = useState('favorite');
 
     // Event data list
-    const [activityDataList, setActivityDataList] = useState([{
-        user: [],
-        user_data: []
+    const [charityDataList, setCharityDataList] = useState([{
+        company: [],
+        company_detail: []
     }]);
 
 
@@ -124,7 +124,7 @@ const Activity = (props) => { // настройки приложения
 
     const handleTab = (event) => {
         console.log(event.target.id);
-        setStatusActivity(event.target.id);
+        setStatusCharity(event.target.id);
     };
 
     // Создание события
@@ -142,16 +142,16 @@ const Activity = (props) => { // настройки приложения
         return axios({ url: `${startUrlApi}${url}`, method: 'get', headers: getHeaders() }).then(req => req.data);
     }
 
-    const dataActivity = async (status = null) => {
-        const url = status ? `/api/activity/list/?status=${status}` : `/api/activity/`;
+    const dataCharity = async (status = null) => {
+        const url = status ? `/api/charity/all/?status=${status}` : `/api/charity/all/`;
         const data = await loadData(url);
-        setActivityDataList(data);
+        setCharityDataList(data);
     }
 
     useEffect(() => {
         console.log('Будут загружены данные');
-        dataActivity(statusActivity);
-    }, [statusActivity,])
+        dataCharity(statusCharity);
+    }, [statusCharity,])
 
     return (
         <>
@@ -192,15 +192,16 @@ const Activity = (props) => { // настройки приложения
                                     }
                                 }>
                                     <CButton className='btn btn-primary btn-sm'
-                                        onClick={handleButtonCreateEvent}>+ Добавить новую</CButton>
+                                        onClick={handleButtonCreateEvent}>+ Предложить новую</CButton>
                                 </div>
 
                             </CForm>
                             {/* Табы */}
+                            <h1>Цели благотворительности команды</h1>
                             <nav>
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                     <button className={
-                                        statusActivity == "favorite" ? "nav-link active" : "nav-link"
+                                        statusCharity == "favorite" ? "nav-link active" : "nav-link"
                                     }
                                         id="favorite"
                                         data-coreui-toggle="tab"
@@ -211,9 +212,9 @@ const Activity = (props) => { // настройки приложения
                                         aria-selected="true"
                                         onClick={
                                             (e) => handleTab(e)
-                                        }>Избранное</button>
+                                        }>В процессе</button>
                                     <button className={
-                                        statusActivity == "all" ? "nav-link active" : "nav-link"
+                                        statusCharity == "all" ? "nav-link active" : "nav-link"
                                     }
                                         id="all"
                                         data-coreui-toggle="tab"
@@ -224,7 +225,7 @@ const Activity = (props) => { // настройки приложения
                                         aria-selected="false"
                                         onClick={
                                             (e) => handleTab(e)
-                                        }>Доступные</button>
+                                        }>Завершены</button>
 
                                 </div>
                             </nav>
@@ -234,9 +235,9 @@ const Activity = (props) => { // настройки приложения
                             </div>
                             {/* Карточки с данными */}
                             <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', flexWrap: 'wrap' }}>
-                                {activityDataList.map((item) =>
+                                {charityDataList.map((item) =>
                                     <div>
-                                        <ActivityCard item={item} />
+                                        <CharityCard key={item.id} item={item} />
 
                                     </div>
                                 )
@@ -258,4 +259,4 @@ const Activity = (props) => { // настройки приложения
     )
 }
 
-export default Activity
+export default Charity

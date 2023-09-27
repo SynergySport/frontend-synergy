@@ -69,7 +69,7 @@ const _nav = [
   {
     component: CNavItem,
     name: 'Благотворительность',
-    to: '/interviews',
+    to: '/charity',
     icon: <CIcon icon={cilFlagAlt} customClassName="nav-icon" />,
     badge: {
       color: '',

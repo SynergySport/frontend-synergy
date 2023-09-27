@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 
 import './scss/style.scss'
+import './scss/synergy_css.css'
 
 import axios from "axios";
 

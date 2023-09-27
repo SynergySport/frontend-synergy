@@ -77,14 +77,14 @@ import {
 
 } from '@coreui/icons'
 
-import './ActivityCard.css'
+import './style.css'
 
 
-export const ActivityCard = ({ item }) => {
+export const CharityCard = ({ item }) => {
     return (
-        <CCard className='card_activity' style={{ width: '30rem', height: '600px', marginTop: '10px' }}>
+        <CCard key={item.id} className='card_activity' style={{ width: '30rem', height: '600px', marginTop: '10px' }}>
             <div>
-                <CCardImage orientation="top" src={item.logo} style={{ height: '250px' }} placeholder={item.first_name} />
+                <CCardImage orientation="top" src={item.image} style={{ height: '250px' }} placeholder={item.title} />
             </div>
 
             <CCardBody>
@@ -96,16 +96,18 @@ export const ActivityCard = ({ item }) => {
             </CCardBody>
             <CListGroup flush>
                 <CListGroupItem style={{ display: 'flex', flexDirection: 'column' }}>
-                    <span className='title-small-info '>Единица измерения: {item.unit_txt}</span>
-                    <span className='title-small-info '>Стоимость единицы: {item.cost_unit}</span>
+                    <span className='title-small-info '>Сроки выполнения: с {item.start_date} до {item.end_date}</span>
+
+                    <span className='title-small-info '>Требуется единиц: {item.units_required}</span>
+                    <span className='title-small-info '>Выполнено: {`50%`}</span>
                 </CListGroupItem>
                 <CListGroupItem>
-                    <span className='title-small-info'>Участники: {item.user.length}</span>
+                    <span className='title-small-info'>Поддерживают компании: {item.company.length}</span>
                     <div style={{ display: 'flex', flexDirection: 'row', gap: '5px', flexWrap: 'wrap' }}>
-                        {item.user_data.slice(0, 5).map((user) => <div>
-                            <CAvatar src={user.avatar} status="success" />
-                            {/* {user.first_name} */}
-                        </div>)} + {item.user.length - item.user_data.slice(0, 5).length}
+                        {item.company_detail.slice(0, 5).map((item) => <div>
+                            <CAvatar key={item.id} src={item.logo} status="success" />
+                            {item.name}
+                        </div>)} + {item.company.length - item.company.slice(0, 5).length}
                     </div>
                 </CListGroupItem>
 
