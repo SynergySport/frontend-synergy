@@ -3,7 +3,14 @@ import React from 'react'
 const Profile = React.lazy(() => import('./views/profile/Pofile'))
 const Events = React.lazy(() => import('./views/events/Event'))
 const Activity = React.lazy(() => import('./views/activity/Activity'))
+const Charity = React.lazy(() => import('./views/charity/Charity'))
+const Training = React.lazy(() => import('./views/training/Training'))
+const Rating = React.lazy(() => import('./views/rating/Rating'))
+const CompProgress = React.lazy(() => import('./views/progress/CompProgress'))
+const ManageAccount = React.lazy(() => import('./views/accounting/ManageAccount'))
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
+const Staff=React.lazy(() => import('./views/staff/StaffList'))
+
 const Mergeflow = React.lazy(() => import('./views/mergeflow/Mergeflow'))
 const Tests = React.lazy(() => import('./views/tests/Tests'))
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
@@ -60,7 +67,14 @@ const routes = [
   { path: '/profile', name: 'Мой профиль', element: Profile },
   { path: '/events', name: 'События', element: Events },
   { path: '/activity', name: 'Виды активностей', element: Activity },
+  { path: '/charity', name: 'Благотворительность', element: Charity },
+  { path: '/training', name: 'Благотворительность', element: Training },
+  { path: '/rating', name: 'Благотворительность', element: Rating },
+  { path: '/progress', name: 'Достижения компании', element: CompProgress },
+  { path: '/accounting', name: 'Управленческий учет', element: ManageAccount},
   { path: '/dashboard', name: 'Сводная аналитика', element: Dashboard },
+  { path: '/staff', name: 'Персонал', element: Staff},
+
   { path: '/tools/mergeflow', name: 'Маршруты собеседований', element: Mergeflow },
   { path: '/tools/tests', name: 'Tests', element: Tests },
   { path: '/theme', name: 'Theme', element: Colors, exact: true },

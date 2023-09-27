@@ -41,14 +41,14 @@ const AppHeader = () => {
         <CHeaderNav className="d-none d-md-flex me-auto">
           <CNavItem>
             <CNavLink to="/dashboard" component={NavLink}>
-              Аналитика
+              Магазин спортоваров
             </CNavLink>
           </CNavItem>
           <CNavItem>
-            <CNavLink href="#">Кандидаты</CNavLink>
+            <CNavLink href="#">Спортивные школы</CNavLink>
           </CNavItem>
           <CNavItem>
-            <CNavLink href="#">Настройки</CNavLink>
+            <CNavLink href="#">Форум спортсменов</CNavLink>
           </CNavItem>
         </CHeaderNav>
         <CHeaderNav>
