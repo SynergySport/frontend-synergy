@@ -84,7 +84,7 @@ export const ActivityCard = ({ item }) => {
     return (
         <CCard className='card_activity' style={{ width: '30rem', height: '600px', marginTop: '10px' }}>
             <div>
-                <CCardImage orientation="top" src={item.logo} style={{ height: '250px' }} placeholder={item.first_name} />
+                <CCardImage orientation="top" src={item.logo} style={{ height: '250px', objectFit: 'cover' }} placeholder={item.first_name} />
             </div>
 
             <CCardBody>

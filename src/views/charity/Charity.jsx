@@ -108,7 +108,7 @@ const Charity = (props) => { // настройки приложения
     // описание триггеров для бизнес логики
     const [inputSearch, setInputSearch] = useState('');
     // статус события
-    const [statusCharity, setStatusCharity] = useState('favorite');
+    const [statusCharity, setStatusCharity] = useState('in-process');
 
     // Event data list
     const [charityDataList, setCharityDataList] = useState([{
@@ -197,15 +197,14 @@ const Charity = (props) => { // настройки приложения
 
                             </CForm>
                             {/* Табы */}
-                            <h1>Цели благотворительности команды</h1>
                             <nav>
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                     <button className={
-                                        statusCharity == "favorite" ? "nav-link active" : "nav-link"
+                                        statusCharity == "in-process" ? "nav-link active" : "nav-link"
                                     }
-                                        id="favorite"
+                                        id="in-process"
                                         data-coreui-toggle="tab"
-                                        data-coreui-target="#nav-activity-favorite"
+                                        data-coreui-target="#nav-activity-in-process"
                                         type="button"
                                         role="tab"
                                         aria-controls="nav-home"
@@ -214,11 +213,11 @@ const Charity = (props) => { // настройки приложения
                                             (e) => handleTab(e)
                                         }>В процессе</button>
                                     <button className={
-                                        statusCharity == "all" ? "nav-link active" : "nav-link"
+                                        statusCharity == "completed" ? "nav-link active" : "nav-link"
                                     }
-                                        id="all"
+                                        id="completed"
                                         data-coreui-toggle="tab"
-                                        data-coreui-target="#nav-activity-all"
+                                        data-coreui-target="#nav-activity-completed"
                                         type="button"
                                         role="tab"
                                         aria-controls="nav-profile"
@@ -230,8 +229,8 @@ const Charity = (props) => { // настройки приложения
                                 </div>
                             </nav>
                             <div class="tab-content" id="nav-tabContent">
-                                <div class="tab-pane fade show active" id="favorite" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0"></div>
-                                <div class="tab-pane fade" id="all" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0"></div>
+                                <div class="tab-pane fade show active" id="in-process" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0"></div>
+                                <div class="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0"></div>
                             </div>
                             {/* Карточки с данными */}
                             <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', flexWrap: 'wrap' }}>

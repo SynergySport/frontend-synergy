@@ -84,7 +84,7 @@ export const CharityCard = ({ item }) => {
     return (
         <CCard key={item.id} className='card_activity' style={{ width: '30rem', height: '600px', marginTop: '10px' }}>
             <div>
-                <CCardImage orientation="top" src={item.image} style={{ height: '250px' }} placeholder={item.title} />
+                <CCardImage orientation="top" src={item.image} style={{ height: '250px', objectFit: 'cover' }} placeholder={item.title} />
             </div>
 
             <CCardBody>

@@ -50,6 +50,12 @@ const _nav = [
       text: '',
     },
   },
+    {
+    component: CNavItem,
+    name: 'Тренировки',
+    to: '/training',
+    icon: <CIcon icon={cilGraph} customClassName="nav-icon" />,
+  },
   {
     component: CNavItem,
     name: 'Выбор активностей',
@@ -60,17 +66,12 @@ const _nav = [
       text: '',
     },
   },
-  {
-    component: CNavItem,
-    name: 'Тренировки',
-    to: '/tools/mergeflow',
-    icon: <CIcon icon={cilGraph} customClassName="nav-icon" />,
-  },
+
   {
     component: CNavItem,
     name: 'Благотворительность',
     to: '/charity',
-    icon: <CIcon icon={cilFlagAlt} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
     badge: {
       color: '',
       text: '',
@@ -79,8 +80,8 @@ const _nav = [
   {
     component: CNavItem,
     name: 'Рейтинг участников',
-    to: '/interviews',
-    icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+    to: '/rating',
+    icon: <CIcon icon={cilChartPie} customClassName="nav-icon" />,
     badge: {
       color: '',
       text: '',
@@ -89,8 +90,8 @@ const _nav = [
   {
     component: CNavItem,
     name: 'Достижения компании',
-    to: '/interviews',
-    icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+    to: '/progress',
+    icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
     badge: {
       color: '',
       text: '',
@@ -103,13 +104,13 @@ const _nav = [
   {
     component: CNavItem,
     name: 'Управленческий учет',
-    to: '/events',
-    icon: <CIcon icon={cilContact} customClassName="nav-icon" />,
+    to: '/accounting',
+    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
     name: 'Сотрудники',
-    to: '/events',
+    to: '/staff',
     icon: <CIcon icon={cilContact} customClassName="nav-icon" />,
   },
   {
