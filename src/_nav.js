@@ -22,6 +22,7 @@ import {
   cilUser,
   cilFlagAlt,
   cilGraph,
+  cilBank,
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
@@ -105,7 +106,7 @@ const _nav = [
     component: CNavItem,
     name: 'Управленческий учет',
     to: '/accounting',
-    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilBank} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,

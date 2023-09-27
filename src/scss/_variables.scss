@@ -6,7 +6,7 @@
 
 // scss-docs-start gray-color-variables
 $white: #fff !default;
-$gray-base: #2a2c30 !default;
+$gray-base: #003459 !default;
 $gray-100: #ebedef !default;
 $gray-200: #d8dbe0 !default;
 $gray-300: #c4c9d0 !default;
@@ -75,9 +75,9 @@ $grays: (
 
 // fusv-disable
 // $primary-dark:  #1f1498 !default;
-// $primary-base:  #321fdb !default;
-// $primary-50:    #988fed !default;
-// $primary-25:    #ccc7f6 !default;
+$primary-base:  #003459 !default;
+$primary-50:    #988fed !default;
+$primary-25:    #ccc7f6 !default;
 
 // $secondary-dark:  #212233 !default;
 // $secondary-base:  #9da5b1 !default;
