@@ -132,6 +132,19 @@ const Activity = (props) => { // настройки приложения
         alert('Будет создано новое событи');
     }
 
+    // Чек на карточке
+    const handleCheckFavoriteActivity = async (event) => {
+        console.log('чек сработал')
+        const checkTargetId = event.target.id
+        const checkData = {
+            "activity": checkTargetId
+        }
+        const url = `/api/activity/check/`;
+        const data = await postData(url, checkData);
+        dataActivity(statusActivity)
+    }
+
+
     // Модальная форма
     const handleModalFormEventDetail = (event) => {
         alert(`Будет показана форма с описанием события ${event.target.id
@@ -142,8 +155,13 @@ const Activity = (props) => { // настройки приложения
         return axios({ url: `${startUrlApi}${url}`, method: 'get', headers: getHeaders() }).then(req => req.data);
     }
 
+    async function postData(url, dataJson) {
+        return axios({ url: `${startUrlApi}${url}`, method: 'post', headers: getHeaders(), data: dataJson }).then(req => req.data);
+    }
+
+
     const dataActivity = async (status = null) => {
-        const url = status ? `/api/activity/list/?status=${status}` : `/api/activity/`;
+        const url = status ? `/api/activity/list/?status=${status}` : `/api/activity/list/?status=${statusActivity}`;
         const data = await loadData(url);
         setActivityDataList(data);
     }
@@ -236,8 +254,7 @@ const Activity = (props) => { // настройки приложения
                             <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', flexWrap: 'wrap' }}>
                                 {activityDataList.map((item) =>
                                     <div>
-                                        <ActivityCard item={item} />
-
+                                        <ActivityCard item={item} postDataFunc={postData} checkActivityFunc={handleCheckFavoriteActivity} />
                                     </div>
                                 )
                                 }

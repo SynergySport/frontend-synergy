@@ -80,7 +80,9 @@ import {
 import './ActivityCard.css'
 
 
-export const ActivityCard = ({ item }) => {
+export const ActivityCard = ({ item, postDataFunc, checkActivityFunc }) => {
+
+
     return (
         <CCard className='card_activity' style={{ width: '30rem', height: '600px', marginTop: '10px' }}>
             <div>
@@ -99,13 +101,30 @@ export const ActivityCard = ({ item }) => {
                     <span className='title-small-info '>Единица измерения: {item.unit_txt}</span>
                     <span className='title-small-info '>Стоимость единицы: {item.cost_unit}</span>
                 </CListGroupItem>
+                <CListGroupItem style={{
+                    display: 'flex', flexDirection: 'row',
+                    justifyContent: 'space-between', alignItems: 'center'
+                }}>
+                    <span className='title-small-info '> Учавствую: </span>
+                    <div class="form-check form-switch" style={{ display: 'flex', gap: '10px' }}>
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id={item.id}
+                            name="is_active"
+                            checked={item.is_my_favorite}
+                            onChange={checkActivityFunc}
+                        />
+                    </div>
+                </CListGroupItem>
                 <CListGroupItem>
-                    <span className='title-small-info'>Участники: {item.user.length}</span>
+                    <span className='title-small-info'>Участники: {item.user_data.length}</span>
                     <div style={{ display: 'flex', flexDirection: 'row', gap: '5px', flexWrap: 'wrap' }}>
                         {item.user_data.slice(0, 5).map((user) => <div>
                             <CAvatar src={user.avatar} status="success" />
                             {/* {user.first_name} */}
-                        </div>)} + {item.user.length - item.user_data.slice(0, 5).length}
+                        </div>)}
+                        {item.user_data.length > 5 ? `+ ` + (item.user_data.length - item.user_data.slice(0, 5).length) : ''}
                     </div>
                 </CListGroupItem>
 
