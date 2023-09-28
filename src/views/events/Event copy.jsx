@@ -79,8 +79,6 @@ import {
 
 import { getFormatDate } from '../../utils/datetime.js';
 
-import { EventCard } from './EventCard/EventCard'
-
 // import { every } from 'core-js/core/array'
 
 
@@ -102,7 +100,7 @@ const Events = (props) => { // настройки приложения
 
     // Event data list
     const [eventsDataList, setEventsDataList] = useState([{
-        users_data: []
+        user: []
     }]);
 
 
@@ -127,27 +125,9 @@ const Events = (props) => { // настройки приложения
             }`);
     }
 
-    // Регистрация на активность
-    const registerOnEvent = async (event) => {
-        const checkTargetId = event.target.id
-        const checkData = {
-            "event": checkTargetId
-
-        }
-        const url = `/api/events/registration/`;
-        const data = await postData(url, checkData);
-        dataEvents(statusEvent)
-    }
-
-
     async function loadData(url) {
         return axios({ url: `${startUrlApi}${url}`, method: 'get', headers: getHeaders() }).then(req => req.data);
     }
-
-    async function postData(url, dataJson) {
-        return axios({ url: `${startUrlApi}${url}`, method: 'post', headers: getHeaders(), data: dataJson }).then(req => req.data);
-    }
-
 
     const dataEvents = async (status = null) => {
         const url = status ? `/api/events/all/?status=${status}` : `/api/events/all/`;
@@ -198,7 +178,7 @@ const Events = (props) => { // настройки приложения
                                         marginTop: '10px'
                                     }
                                 }>
-                                    <CButton className='btn btn-primary btn-sm'
+                                    <CButton className='btn btn-secondary btn-sm'
                                         onClick={handleButtonCreateEvent}>+ Добавить событие</CButton>
                                 </div>
 
@@ -266,11 +246,128 @@ const Events = (props) => { // настройки приложения
                                 <div class="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0"></div>
                                 <div class="tab-pane fade" id="cancelled" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0"></div>
                             </div>
-                            {/* Вывод карточек событий */}
-                            <div style={{ display: 'flex', flexDirection: 'row', gap: '20px', flexWrap: 'wrap' }}>
-                                {eventsDataList.map((item) => <EventCard item={item} checkEventFunc={registerOnEvent} />)}
-                            </div>
+                            {/* Таблица с данными */}
+                            <CTable align="middle" className="mb-0 border" hover responsive
+                                style={
+                                    { marginTop: "15px" }
+                                }>
+                                <CTableHead color="light">
+                                    <CTableRow>
+                                        <CTableHeaderCell className="text-center">
+                                            <CIcon icon={cilCheck} />
+                                        </CTableHeaderCell>
+                                        <CTableHeaderCell className="text-center">
+                                            <CIcon icon={cilPeople} />
+                                        </CTableHeaderCell>
+                                        <CTableHeaderCell className="text-center">Наименование</CTableHeaderCell>
+                                        <CTableHeaderCell className="text-center">Описание</CTableHeaderCell>
+                                        <CTableHeaderCell className="text-center">Дата начала</CTableHeaderCell>
+                                        <CTableHeaderCell className="text-center">Дата окончания</CTableHeaderCell>
+                                        <CTableHeaderCell className="text-center">Статус</CTableHeaderCell>
+                                        <CTableHeaderCell className="text-center">Баллы за участие</CTableHeaderCell>
+                                        <CTableHeaderCell className="text-center">Требуется</CTableHeaderCell>
+                                        <CTableHeaderCell className="text-center">Зарегистрировано</CTableHeaderCell>
+                                        <CTableHeaderCell className="text-center">Создана</CTableHeaderCell>
+                                        <CTableHeaderCell className="text-center">Действия</CTableHeaderCell>
+                                    </CTableRow>
+                                </CTableHead>
+                                <CTableBody> {
+                                    eventsDataList.map((item, index) => (
+                                        <CTableRow v-for="item in tableItems"
+                                            key={index}
+                                            id={
+                                                item.id
+                                            }>
+                                            <CTableDataCell className="text-center"
+                                                id={item.id}>
+                                                <CBadge color="info">#{`${item.id}`}</CBadge>
+                                            </CTableDataCell>
+                                            <CTableDataCell className="text-center" id={item.id}>
+                                                <img src={item.cover} style={{ width: '150px' }}></img>
+                                            </CTableDataCell>
+                                            <CTableDataCell>
+                                                <div>{item.title}</div>
+                                            </CTableDataCell>
+                                            <CTableDataCell>
+                                                <div>{item.description}</div>
+                                            </CTableDataCell>
+                                            <CTableDataCell>
+                                                <div>
+                                                    {getFormatDate(item.start_date)}
+                                                </div>
+                                            </CTableDataCell>
+                                            <CTableDataCell>
+                                                <div>{getFormatDate(item.end_date)}</div>
+                                            </CTableDataCell>
+                                            <CTableDataCell className="text-center">
+                                                <CBadge color="primary" shape="rounded-pill">{item.status_txt}</CBadge>
+                                            </CTableDataCell>
+                                            <CTableDataCell className="text-center">
+                                                <div>{item.cost_units}</div>
+                                            </CTableDataCell>
+                                            <CTableDataCell className="text-center">
+                                                <div>{item.number_participants}</div>
+                                            </CTableDataCell>
+                                            <CTableDataCell className="text-center">
+                                                <div>{item.user.length}</div>
+                                            </CTableDataCell>
+                                            <CTableDataCell>
+                                                <div>{getFormatDate(item.created_at)}</div>
+                                            </CTableDataCell>
 
+                                            <CTableDataCell id={
+                                                item.id
+                                            }
+                                                className="text-center"
+                                                style={
+                                                    { width: '200px' }
+                                                }>
+                                                <CButton id={
+                                                    item.id
+                                                }
+                                                    color="secondary"
+                                                    variant="outline"
+                                                    className='add-margin'
+                                                    onClick={
+                                                        (e) => handleModalFormEventDetail(e)
+                                                    }>
+                                                    <CIcon id={
+                                                        item.id
+                                                    }
+                                                        icon={cilSpreadsheet} />
+                                                </CButton>
+                                                <CButton id={
+                                                    item.id
+                                                }
+                                                    color="secondary"
+                                                    variant="outline"
+                                                    className='add-margin'
+                                                    onClick={
+                                                        (e) => alert(e.target.id)
+                                                    }>
+                                                    <CIcon id={
+                                                        item.id
+                                                    }
+                                                        icon={cilCheckCircle} />
+                                                </CButton>
+                                                <CButton id={
+                                                    item.id
+                                                }
+                                                    color="secondary"
+                                                    variant="outline"
+                                                    onClick={
+                                                        (e) => alert(e.target.id)
+                                                    }>
+                                                    <CIcon id={
+                                                        item.id
+                                                    }
+                                                        icon={cilTrash} />
+                                                </CButton>
+                                            </CTableDataCell>
+                                        </CTableRow>
+                                    ))
+                                } </CTableBody>
+                            </CTable>
                         </CCardBody>
                     </CCard>
                 </CCol>

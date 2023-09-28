@@ -120,6 +120,7 @@ const Activity = (props) => { // настройки приложения
     // динамический поиск
     const handleInputSeacrh = (event) => {
         setInputSearch(event.target.value);
+        console.log(event.target.value);
     }
 
     const handleTab = (event) => {
@@ -132,6 +133,19 @@ const Activity = (props) => { // настройки приложения
         alert('Будет создано новое событи');
     }
 
+    // Чек на карточке
+    const handleCheckFavoriteActivity = async (event) => {
+        console.log('чек сработал')
+        const checkTargetId = event.target.id
+        const checkData = {
+            "activity": checkTargetId
+        }
+        const url = `/api/activity/check/`;
+        const data = await postData(url, checkData);
+        dataActivity(statusActivity)
+    }
+
+
     // Модальная форма
     const handleModalFormEventDetail = (event) => {
         alert(`Будет показана форма с описанием события ${event.target.id
@@ -142,8 +156,14 @@ const Activity = (props) => { // настройки приложения
         return axios({ url: `${startUrlApi}${url}`, method: 'get', headers: getHeaders() }).then(req => req.data);
     }
 
+    async function postData(url, dataJson) {
+        return axios({ url: `${startUrlApi}${url}`, method: 'post', headers: getHeaders(), data: dataJson }).then(req => req.data);
+    }
+
+
     const dataActivity = async (status = null) => {
-        const url = status ? `/api/activity/list/?status=${status}` : `/api/activity/`;
+        const searchTxt = inputSearch ? `&search=${inputSearch}` : ``;
+        const url = status ? `/api/activity/list/?status=${status}${searchTxt}` : `/api/activity/list/?status=${statusActivity}${searchTxt}`;
         const data = await loadData(url);
         setActivityDataList(data);
     }
@@ -151,7 +171,7 @@ const Activity = (props) => { // настройки приложения
     useEffect(() => {
         console.log('Будут загружены данные');
         dataActivity(statusActivity);
-    }, [statusActivity,])
+    }, [statusActivity, inputSearch])
 
     return (
         <>
@@ -179,7 +199,7 @@ const Activity = (props) => { // настройки приложения
                                     <CFormInput type="text" id="" placeholder="Начните вводить текст"
                                         value={inputSearch}
                                         onChange={
-                                            (e) => setInputSearch(e.target.value)
+                                            (e) => handleInputSeacrh(e)
                                         } />
                                 </div>
 
@@ -233,11 +253,10 @@ const Activity = (props) => { // настройки приложения
                                 <div class="tab-pane fade" id="all" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0"></div>
                             </div>
                             {/* Карточки с данными */}
-                            <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', flexWrap: 'wrap' }}>
+                            <div style={{ display: 'flex', flexDirection: 'row', gap: '20px', flexWrap: 'wrap' }}>
                                 {activityDataList.map((item) =>
                                     <div>
-                                        <ActivityCard item={item} />
-
+                                        <ActivityCard item={item} postDataFunc={postData} checkActivityFunc={handleCheckFavoriteActivity} />
                                     </div>
                                 )
                                 }
