@@ -120,6 +120,7 @@ const Activity = (props) => { // настройки приложения
     // динамический поиск
     const handleInputSeacrh = (event) => {
         setInputSearch(event.target.value);
+        console.log(event.target.value);
     }
 
     const handleTab = (event) => {
@@ -161,7 +162,8 @@ const Activity = (props) => { // настройки приложения
 
 
     const dataActivity = async (status = null) => {
-        const url = status ? `/api/activity/list/?status=${status}` : `/api/activity/list/?status=${statusActivity}`;
+        const searchTxt = inputSearch ? `&search=${inputSearch}` : ``;
+        const url = status ? `/api/activity/list/?status=${status}${searchTxt}` : `/api/activity/list/?status=${statusActivity}${searchTxt}`;
         const data = await loadData(url);
         setActivityDataList(data);
     }
@@ -169,7 +171,7 @@ const Activity = (props) => { // настройки приложения
     useEffect(() => {
         console.log('Будут загружены данные');
         dataActivity(statusActivity);
-    }, [statusActivity,])
+    }, [statusActivity, inputSearch])
 
     return (
         <>
@@ -197,7 +199,7 @@ const Activity = (props) => { // настройки приложения
                                     <CFormInput type="text" id="" placeholder="Начните вводить текст"
                                         value={inputSearch}
                                         onChange={
-                                            (e) => setInputSearch(e.target.value)
+                                            (e) => handleInputSeacrh(e)
                                         } />
                                 </div>
 
@@ -251,7 +253,7 @@ const Activity = (props) => { // настройки приложения
                                 <div class="tab-pane fade" id="all" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0"></div>
                             </div>
                             {/* Карточки с данными */}
-                            <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', flexWrap: 'wrap' }}>
+                            <div style={{ display: 'flex', flexDirection: 'row', gap: '20px', flexWrap: 'wrap' }}>
                                 {activityDataList.map((item) =>
                                     <div>
                                         <ActivityCard item={item} postDataFunc={postData} checkActivityFunc={handleCheckFavoriteActivity} />

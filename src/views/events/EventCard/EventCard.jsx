@@ -77,54 +77,66 @@ import {
 
 } from '@coreui/icons'
 
-import './ActivityCard.css'
+import './style.css'
+import { getFormatDate } from '../../../utils/datetime.js';
 
 
-export const ActivityCard = ({ item, postDataFunc, checkActivityFunc }) => {
+export const EventCard = ({ item, postDataFunc, checkEventFunc }) => {
 
 
     return (
         <CCard className='card_activity' style={{ width: '30rem', height: '600px', marginTop: '10px' }}>
             <div>
-                <CCardImage orientation="top" src={item.logo} style={{ height: '250px', objectFit: 'cover' }} placeholder={item.first_name} />
+                <CCardImage orientation="top" src={item.cover} style={{ height: '250px', objectFit: 'cover' }} placeholder={item.first_name} />
             </div>
 
             <CCardBody>
-
-                <CCardTitle>{item.title} </CCardTitle>
+                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'right' }}>
+                    {(item.registration_is_completed == true || item.status != 'new') ?
+                        <CBadge color="success" shape="rounded-pill">регистрация завершена</CBadge> :
+                        <CBadge color="info" shape="rounded-pill">регистрация участников</CBadge>
+                    }
+                </div>
+                <CCardTitle style={{ display: 'flex', flexDirection: 'row' }}>
+                    <div>{item.title}</div>
+                </CCardTitle>
+                <span>{getFormatDate(item.start_date)}</span>
                 <CCardText className='description-activity' style={{ height: '80px', overflowX: 'hidden', overflowY: 'auto' }}>
                     {item.description}
                 </CCardText>
             </CCardBody>
             <CListGroup flush>
                 <CListGroupItem style={{ display: 'flex', flexDirection: 'column' }}>
-                    <span className='title-small-info '>Единица измерения: {item.unit_txt}</span>
-                    <span className='title-small-info '>Стоимость единицы: {item.cost_unit}</span>
+                    <span className='title-small-info '>Единица измерения: событие</span>
+                    <span className='title-small-info '>Баллов за участие: {item.cost_units}</span>
+                    <span className='title-small-info ' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <div>Набрано участников: {item.users_data.length} из {item.number_participants}</div>
+                        <div>Ограничено количество: {item.limited_quantity ? `да` : `нет`}</div>
+                    </span>
                 </CListGroupItem>
                 <CListGroupItem style={{
                     display: 'flex', flexDirection: 'row',
                     justifyContent: 'space-between', alignItems: 'center'
                 }}>
-                    <span className='title-small-info '> Учавствую: </span>
+
+
+                    <div style={{ display: 'flex', flexDirection: 'row', gap: '5px', flexWrap: 'wrap' }}>
+                        {item.users_data.map((user) => <div>
+                            <CAvatar src={user.avatar} status="success" />
+                        </div>
+                        )}
+                    </div>
+
+
                     <div class="form-check form-switch" style={{ display: 'flex', gap: '10px' }}>
                         <input
                             class="form-check-input"
                             type="checkbox"
                             id={item.id}
                             name="is_active"
-                            checked={item.is_my_favorite}
-                            onChange={checkActivityFunc}
+                            checked={item.is_my_event}
+                            onChange={checkEventFunc}
                         />
-                    </div>
-                </CListGroupItem>
-                <CListGroupItem>
-                    <span className='title-small-info'>Участники: {item.user_data.length}</span>
-                    <div style={{ display: 'flex', flexDirection: 'row', gap: '5px', flexWrap: 'wrap' }}>
-                        {item.user_data.slice(0, 5).map((user) => <div>
-                            <CAvatar src={user.avatar} status="success" />
-                            {/* {user.first_name} */}
-                        </div>)}
-                        {item.user_data.length > 5 ? `+ ` + (item.user_data.length - item.user_data.slice(0, 5).length) : ''}
                     </div>
                 </CListGroupItem>
 
