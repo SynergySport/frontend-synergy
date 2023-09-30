@@ -113,7 +113,10 @@ const Charity = (props) => { // настройки приложения
     // Event data list
     const [charityDataList, setCharityDataList] = useState([{
         company: [],
-        company_detail: []
+        company_detail: [],
+        foundation_detail: {
+            name: ''
+        }
     }]);
 
 
@@ -138,9 +141,28 @@ const Charity = (props) => { // настройки приложения
             }`);
     }
 
+    const addCharityInFavorite = async (event) => {
+        const checkTargetId = event.target.id
+        const checkData = {
+            "charity": checkTargetId
+
+        }
+        const url = `/api/charity/check/`;
+        const data = await postData(url, checkData);
+        dataCharity(statusCharity);
+    }
+
+
+
+
     async function loadData(url) {
         return axios({ url: `${startUrlApi}${url}`, method: 'get', headers: getHeaders() }).then(req => req.data);
     }
+
+    async function postData(url, dataJson) {
+        return axios({ url: `${startUrlApi}${url}`, method: 'post', headers: getHeaders(), data: dataJson }).then(req => req.data);
+    }
+
 
     const dataCharity = async (status = null) => {
         const url = status ? `/api/charity/all/?status=${status}` : `/api/charity/all/`;
@@ -236,7 +258,7 @@ const Charity = (props) => { // настройки приложения
                             <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', flexWrap: 'wrap' }}>
                                 {charityDataList.map((item) =>
                                     <div>
-                                        <CharityCard key={item.id} item={item} />
+                                        <CharityCard key={item.id} item={item} checkCharityFunc={addCharityInFavorite} />
 
                                     </div>
                                 )

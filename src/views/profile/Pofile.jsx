@@ -64,6 +64,9 @@ const Profile = () => {
                         organization={
                             dataProfile.company
                         }
+                        department={
+                            dataProfile.department_str
+                        }
                         email={
                             dataProfile.email
                         }
@@ -79,6 +82,9 @@ const Profile = () => {
                         }
                         organization={
                             dataProfile.company
+                        }
+                        department={
+                            dataProfile.department_str
                         }
                         city={
                             dataProfile.city

@@ -268,7 +268,7 @@ const Events = (props) => { // настройки приложения
                             </div>
                             {/* Вывод карточек событий */}
                             <div style={{ display: 'flex', flexDirection: 'row', gap: '20px', flexWrap: 'wrap' }}>
-                                {eventsDataList.map((item) => <EventCard item={item} checkEventFunc={registerOnEvent} />)}
+                                {eventsDataList.map((item) => <EventCard item={item} checkEventFunc={registerOnEvent} statusEvent={statusEvent} />)}
                             </div>
 
                         </CCardBody>
