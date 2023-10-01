@@ -38,8 +38,12 @@ import {
 
 import CIcon from '@coreui/icons-react'
 
+import { getFormatDate } from '../../../utils/datetime.js';
 
-export const PersonalDashboard = () => {
+
+export const PersonalDashboard = ({ myActivityStat }) => {
+
+
 
     const progressGroupExample1 = [
         { title: '25.09.2023', value1: 34, value2: 78 },
@@ -67,42 +71,42 @@ export const PersonalDashboard = () => {
         <div>
             <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: "15px" }}>
                 {/* <CRow> */}
-                <CCol xs={4} md={4} xl={4}>
+                <CCol xs={12} md={6} xl={12}>
                     <CRow>
                         <CCol sm={4}>
                             <div className="border-start border-start-4 border-start-info py-1 px-3">
                                 <div className="text-medium-emphasis small">Активность</div>
-                                <div className="fs-5 fw-semibold">Бег</div>
+                                <div className="fs-5 fw-semibold">{myActivityStat.activity_title}</div>
                             </div>
                         </CCol>
                         <CCol sm={4}>
                             <div className="border-start border-start-4 border-start-danger py-1 px-3 mb-3">
-                                <div className="text-medium-emphasis small">Фактические результаты</div>
-                                <div className="fs-5 fw-semibold">25 км.</div>
+                                <div className="text-medium-emphasis small">{myActivityStat.activity_unit_label}</div>
+                                <div className="fs-5 fw-semibold">17 {myActivityStat.activity_unit}</div>
                             </div>
                         </CCol>
                         <CCol sm={4}>
                             <div className="border-start border-start-4 border-start-danger py-1 px-3 mb-3">
-                                <div className="text-medium-emphasis small">Усл. единиц</div>
-                                <div className="fs-5 fw-semibold">25</div>
+                                <div className="text-medium-emphasis small">Баллов</div>
+                                <div className="fs-5 fw-semibold">{myActivityStat.sum_cost_event_in_units}</div>
                             </div>
                         </CCol>
                     </CRow>
 
                     <hr className="mt-0" />
-                    {progressGroupExample1.map((item, index) => (
+                    {myActivityStat.results.map((item, index) => (
                         <div className="progress-group mb-4" key={index}>
                             <div className="progress-group-prepend">
-                                <span className="text-medium-emphasis small">{item.title}</span>
+                                <span className="text-medium-emphasis small">{getFormatDate(item.start_datetime)}</span>
                             </div>
                             <div className="progress-group-bars">
-                                <CProgress thin color="info" value={item.value1} />
-                                <CProgress thin color="danger" value={item.value2} />
+                                <CProgress thin color="info" value={item.cost_event_in_units / myActivityStat.sum_cost_event_in_units * 100} />
+                                <CProgress thin color="danger" value={(myActivityStat.sum_cost_event_in_units / 30 * 100) / myActivityStat.results.length} />
                             </div>
                         </div>
                     ))}
                 </CCol>
-                <CCol xs={4} md={4} xl={4}>
+                {/* <CCol xs={4} md={4} xl={4}>
                     <CRow>
                         <CCol sm={4}>
                             <div className="border-start border-start-4 border-start-warning py-1 px-3 mb-3">
@@ -150,10 +154,10 @@ export const PersonalDashboard = () => {
                             </div>
                         </div>
                     ))}
-                </CCol>
+                </CCol> */}
                 {/* </CRow> */}
             </div>
 
-        </div>
+        </div >
     );
 };

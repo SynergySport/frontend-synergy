@@ -105,7 +105,6 @@ const Events = (props) => { // настройки приложения
         users_data: []
     }]);
 
-
     // динамический поиск
     const handleInputSeacrh = (event) => {
         setInputSearch(event.target.value);
