@@ -1,12 +1,18 @@
 import React from 'react'
+import { useEffect, useState, createRef, useContext } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import PropTypes from 'prop-types'
+
+import { AppContext } from "../App";
 
 import { CBadge } from '@coreui/react'
 
 export const AppSidebarNav = ({ items }) => {
+
+  const { startUrlApi, userData, getHeaders } = useContext(AppContext);
+
   const location = useLocation()
-  const navLink = (name, icon, badge) => {
+  const navLink = (name, icon, badge, role) => {
     return (
       <>
         {icon && icon}
@@ -21,10 +27,13 @@ export const AppSidebarNav = ({ items }) => {
   }
 
   const navItem = (item, index) => {
-    const { component, name, badge, icon, ...rest } = item
+    const { component, name, role, badge, icon, ...rest } = item
     const Component = component
     return (
-      <Component
+      <>
+      {/* Добавлена ролевая модель */}
+       { userData.role in item.role ?
+        <Component
         {...(rest.to &&
           !rest.items && {
             component: NavLink,
@@ -33,7 +42,9 @@ export const AppSidebarNav = ({ items }) => {
         {...rest}
       >
         {navLink(name, icon, badge)}
-      </Component>
+      </Component>:
+      "" }
+      </>
     )
   }
   const navGroup = (item, index) => {

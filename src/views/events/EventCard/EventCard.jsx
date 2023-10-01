@@ -77,30 +77,36 @@ import {
 
 } from '@coreui/icons'
 
+
 import './style.css'
 import { getFormatDate } from '../../../utils/datetime.js';
+import { getFormatRuForNum } from '../../../utils/numformat.js';
 
 
-export const EventCard = ({ item, postDataFunc, checkEventFunc }) => {
+export const EventCard = ({ item, postDataFunc, checkEventFunc, statusEvent }) => {
 
 
     return (
         <CCard className='card_activity' style={{ width: '30rem', height: '600px', marginTop: '10px' }}>
-            <div>
+            <div style={{ height: "250px" }}>
                 <CCardImage orientation="top" src={item.cover} style={{ height: '250px', objectFit: 'cover' }} placeholder={item.first_name} />
-            </div>
-
-            <CCardBody>
-                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'right' }}>
+                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'right', position: 'relative', bottom: "55px", right: "15px" }}>
                     {(item.registration_is_completed == true || item.status != 'new') ?
-                        <CBadge color="success" shape="rounded-pill">регистрация завершена</CBadge> :
-                        <CBadge color="info" shape="rounded-pill">регистрация участников</CBadge>
+                        <CBadge color="success" shape="rounded-pill" style={{ padding: '10px 20px', fontSize: '15px' }}>Завершена</CBadge> :
+                        <CBadge color="info" shape="rounded-pill" style={{ padding: '10px 20px', fontSize: '15px' }}>Регистрация</CBadge>
                     }
                 </div>
+            </div>
+            <CCardBody>
                 <CCardTitle style={{ display: 'flex', flexDirection: 'row' }}>
                     <div>{item.title}</div>
                 </CCardTitle>
-                <span>{getFormatDate(item.start_date)}</span>
+                <CCardTitle style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <span className='title-small-info '>Баллы: {item.cost_units}</span>
+                    <span className='title-small-info '>{getFormatDate(item.start_date)}</span>
+                </CCardTitle>
+
+
                 <CCardText className='description-activity' style={{ height: '80px', overflowX: 'hidden', overflowY: 'auto' }}>
                     {item.description}
                 </CCardText>
@@ -108,9 +114,9 @@ export const EventCard = ({ item, postDataFunc, checkEventFunc }) => {
             <CListGroup flush>
                 <CListGroupItem style={{ display: 'flex', flexDirection: 'column' }}>
                     <span className='title-small-info '>Единица измерения: событие</span>
-                    <span className='title-small-info '>Баллов за участие: {item.cost_units}</span>
+
                     <span className='title-small-info ' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <div>Набрано участников: {item.users_data.length} из {item.number_participants}</div>
+                        <div>Участники {item.users_data.length} / {item.number_participants}</div>
                         <div>Ограничено количество: {item.limited_quantity ? `да` : `нет`}</div>
                     </span>
                 </CListGroupItem>
@@ -136,7 +142,9 @@ export const EventCard = ({ item, postDataFunc, checkEventFunc }) => {
                             name="is_active"
                             checked={item.is_my_event}
                             onChange={checkEventFunc}
+                            disabled={statusEvent == 'new' ? false : true}
                         />
+
                     </div>
                 </CListGroupItem>
 
