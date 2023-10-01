@@ -30,6 +30,11 @@ const _nav = [
   {
     component: CNavTitle,
     name: 'Мои ресурсы',
+    role: {
+      'employee': 'сотрудник',
+      'manager': 'руководитель',
+      'repr_found': 'представитель фонда',
+    },
   },
   {
     component: CNavItem,
@@ -39,6 +44,11 @@ const _nav = [
     badge: {
       color: '',
       text: '',
+    },
+    role: {
+      'employee': 'сотрудник',
+      'manager': 'руководитель',
+      'repr_found': 'представитель фонда',
     },
   },
   {
@@ -50,12 +60,22 @@ const _nav = [
       color: '',
       text: '',
     },
+    role: {
+      'employee': 'сотрудник',
+      'manager': 'руководитель',
+      'repr_found': 'представитель фонда',
+    },
   },
     {
     component: CNavItem,
     name: 'Тренировки',
     to: '/training',
     icon: <CIcon icon={cilGraph} customClassName="nav-icon" />,
+    role: {
+      'employee': 'сотрудник',
+      'manager': 'руководитель',
+      'repr_found': 'представитель фонда',
+    },
   },
   {
     component: CNavItem,
@@ -65,6 +85,11 @@ const _nav = [
     badge: {
       color: '',
       text: '',
+    },
+    role: {
+      'employee': 'сотрудник',
+      'manager': 'руководитель',
+      'repr_found': 'представитель фонда',
     },
   },
 
@@ -77,6 +102,11 @@ const _nav = [
       color: '',
       text: '',
     },
+    role: {
+      'employee': 'сотрудник',
+      'manager': 'руководитель',
+      'repr_found': 'представитель фонда',
+    },
   },
   {
     component: CNavItem,
@@ -86,6 +116,11 @@ const _nav = [
     badge: {
       color: '',
       text: '',
+    },
+    role: {
+      'employee': 'сотрудник',
+      'manager': 'руководитель',
+      'repr_found': 'представитель фонда',
     },
   },
   {
@@ -97,22 +132,39 @@ const _nav = [
       color: '',
       text: '',
     },
+    role: {
+      'employee': 'сотрудник',
+      'manager': 'руководитель',
+      'repr_found': 'представитель фонда',
+    },
   },
   {
     component: CNavTitle,
     name: 'Инструменты руководителя',
+    role: {
+      'manager': 'руководитель',
+      'repr_found': 'представитель фонда',
+    },
   },
   {
     component: CNavItem,
     name: 'Управленческий учет',
     to: '/accounting',
     icon: <CIcon icon={cilBank} customClassName="nav-icon" />,
+    role: {
+      'manager': 'руководитель',
+      'repr_found': 'представитель фонда',
+    },
   },
   {
     component: CNavItem,
     name: 'Сотрудники',
     to: '/staff',
     icon: <CIcon icon={cilContact} customClassName="nav-icon" />,
+    role: {
+      'manager': 'руководитель',
+      'repr_found': 'представитель фонда',
+    },
   },
   {
     component: CNavItem,
@@ -122,6 +174,10 @@ const _nav = [
     badge: {
       color: 'info',
       text: 'NEW',
+    },
+    role: {
+      'manager': 'руководитель',
+      'repr_found': 'представитель фонда',
     },
   },
 ]

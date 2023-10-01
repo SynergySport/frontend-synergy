@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 import {
     CRow,
@@ -14,7 +14,7 @@ import {
     CAccordionItem
 } from '@coreui/react';
 
-import {Tab, Tabs, TabList, TabPanel} from "react-tabs";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import "./index.css";
 
@@ -22,6 +22,7 @@ export const ProfileTabs = ({
     is_private,
     position,
     organization,
+    department,
     city,
     birthday,
     aboutMe,
@@ -40,10 +41,10 @@ export const ProfileTabs = ({
                         event.preventDefault()
                         setVisible(!visible)
                     }
-            }>
+                }>
                 Показать информацию обо мне
             </CButton>
-            
+
             {/* <CButton onClick={
                 () => setVisible(!visible)
             }>Button</CButton> */}
@@ -54,8 +55,8 @@ export const ProfileTabs = ({
                             <TabList>
                                 <Tab>Публичные сведения</Tab>
                                 {
-                                !is_private ? <Tab>Приватная информация</Tab> : ''
-                            } </TabList>
+                                    !is_private ? <Tab>Приватная информация</Tab> : ''
+                                } </TabList>
 
                             <TabPanel>
                                 <table className="tabs_data">
@@ -68,8 +69,8 @@ export const ProfileTabs = ({
                                         <td>{organization}</td>
                                     </tr>
                                     <tr>
-                                        <td>Город</td>
-                                        <td>{city}</td>
+                                        <td>Организация</td>
+                                        <td>{department}</td>
                                     </tr>
                                     <tr>
                                         <td>День рождения</td>

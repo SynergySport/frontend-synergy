@@ -21,6 +21,7 @@ export const ProfileContext = ({
     fullName,
     position,
     organization,
+    department,
     email,
     phone,
     telegram
@@ -28,7 +29,7 @@ export const ProfileContext = ({
     return (
         <div className="profile">
             <img src={avatar}
-                className="user-avatar_profile"/>
+                className="user-avatar_profile" />
             <div className="user-information">
                 <p className="user_full-name">
                     {fullName}</p>
@@ -36,6 +37,8 @@ export const ProfileContext = ({
                     {position}</p>
                 <p className="user_organization">
                     {organization}</p>
+                <p className="user_organization">
+                    {department}</p>
             </div>
             <div className="user-contacts">
                 <h6>Контакты:</h6>

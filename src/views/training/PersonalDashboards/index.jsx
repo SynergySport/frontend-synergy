@@ -94,7 +94,6 @@ export const PersonalDashboard = ({ myActivityStat }) => {
                     </CRow>
 
                     <hr className="mt-0" />
-                    <span>в % от общего итога / ср. значение за весь период</span>
                     {myActivityStat.results.map((item, index) => (
                         <div className="progress-group mb-4" key={index}>
                             <div className="progress-group-prepend">
