@@ -152,8 +152,11 @@ const Training = (props) => { // настройки приложения
                     <CRow className='margin-top'>
 
                         {
-                            myActivityStatList.map((item) =>
+                            myActivityStatList.map((item) => <div>
+                                <span>в % от общего итога / ср. значение за весь период</span>
                                 <PersonalDashboard myActivityStat={item} />
+                            </div>
+
                             )
                         }
                     </CRow>

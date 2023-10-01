@@ -85,27 +85,16 @@ export const PersonalDashboard = ({ myActivityStat }) => {
                                 <div className="fs-5 fw-semibold">17 {myActivityStat.activity_unit}</div>
                             </div>
                         </CCol>
-                        <CCol sm={4}>
+                        {/* <CCol sm={4}>
                             <div className="border-start border-start-4 border-start-danger py-1 px-3 mb-3">
                                 <div className="text-medium-emphasis small">Баллов</div>
                                 <div className="fs-5 fw-semibold">{myActivityStat.sum_cost_event_in_units}</div>
                             </div>
-                        </CCol>
+                        </CCol> */}
                     </CRow>
 
                     <hr className="mt-0" />
-                    <span>в % от общего итога / ср. значение за весь период</span>
-                    {myActivityStat.results.map((item, index) => (
-                        <div className="progress-group mb-4" key={index}>
-                            <div className="progress-group-prepend">
-                                <span className="text-medium-emphasis small">{getFormatDate(item.start_datetime)}</span>
-                            </div>
-                            <div className="progress-group-bars">
-                                <CProgress thin color="info" value={item.cost_event_in_units / myActivityStat.sum_cost_event_in_units * 100} />
-                                <CProgress thin color="danger" value={(myActivityStat.sum_cost_event_in_units / 30 * 100) / myActivityStat.results.length} />
-                            </div>
-                        </div>
-                    ))}
+
                 </CCol>
                 {/* <CCol xs={4} md={4} xl={4}>
                     <CRow>
