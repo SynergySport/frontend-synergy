@@ -63,7 +63,13 @@ const Login = (props) => {
     const data = { "username": username, "password": password }
     const a = await axios.post(`${startUrlApi}/api-token-auth/`, data).then((response) => {
         const t = setToken(response.data["token"], response.data["refresh"], username);
-      }).catch(() => alert("Введён неверный логин или пароль!"));
+      }).catch(() => 
+      {
+        alert("Введён неверный логин или пароль!")
+        removeCookie("access");
+        navigate("/", { replace: true });
+      });
+    console.log(a)
     console.log('test')
     navigate("/profile/", { replace: true });
     window.location.reload();
