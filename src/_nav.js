@@ -123,63 +123,63 @@ const _nav = [
       'repr_found': 'представитель фонда',
     },
   },
-  {
-    component: CNavItem,
-    name: 'Достижения компании',
-    to: '/progress',
-    icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
-    badge: {
-      color: '',
-      text: '',
-    },
-    role: {
-      'employee': 'сотрудник',
-      'manager': 'руководитель',
-      'repr_found': 'представитель фонда',
-    },
-  },
-  {
-    component: CNavTitle,
-    name: 'Инструменты руководителя',
-    role: {
-      'manager': 'руководитель',
-      'repr_found': 'представитель фонда',
-    },
-  },
-  {
-    component: CNavItem,
-    name: 'Управленческий учет',
-    to: '/accounting',
-    icon: <CIcon icon={cilBank} customClassName="nav-icon" />,
-    role: {
-      'manager': 'руководитель',
-      'repr_found': 'представитель фонда',
-    },
-  },
-  {
-    component: CNavItem,
-    name: 'Сотрудники',
-    to: '/staff',
-    icon: <CIcon icon={cilContact} customClassName="nav-icon" />,
-    role: {
-      'manager': 'руководитель',
-      'repr_found': 'представитель фонда',
-    },
-  },
-  {
-    component: CNavItem,
-    name: 'Аналитика',
-    to: '/dashboard',
-    icon: <CIcon icon={cilChart} customClassName="nav-icon" />,
-    badge: {
-      color: 'info',
-      text: 'NEW',
-    },
-    role: {
-      'manager': 'руководитель',
-      'repr_found': 'представитель фонда',
-    },
-  },
+  // {
+  //   component: CNavItem,
+  //   name: 'Достижения компании',
+  //   to: '/progress',
+  //   icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
+  //   badge: {
+  //     color: '',
+  //     text: '',
+  //   },
+  //   role: {
+  //     'employee': 'сотрудник',
+  //     'manager': 'руководитель',
+  //     'repr_found': 'представитель фонда',
+  //   },
+  // },
+  // {
+  //   component: CNavTitle,
+  //   name: 'Инструменты руководителя',
+  //   role: {
+  //     'manager': 'руководитель',
+  //     'repr_found': 'представитель фонда',
+  //   },
+  // },
+  // {
+  //   component: CNavItem,
+  //   name: 'Управленческий учет',
+  //   to: '/accounting',
+  //   icon: <CIcon icon={cilBank} customClassName="nav-icon" />,
+  //   role: {
+  //     'manager': 'руководитель',
+  //     'repr_found': 'представитель фонда',
+  //   },
+  // },
+  // {
+  //   component: CNavItem,
+  //   name: 'Сотрудники',
+  //   to: '/staff',
+  //   icon: <CIcon icon={cilContact} customClassName="nav-icon" />,
+  //   role: {
+  //     'manager': 'руководитель',
+  //     'repr_found': 'представитель фонда',
+  //   },
+  // },
+  // {
+  //   component: CNavItem,
+  //   name: 'Аналитика',
+  //   to: '/dashboard',
+  //   icon: <CIcon icon={cilChart} customClassName="nav-icon" />,
+  //   badge: {
+  //     color: 'info',
+  //     text: 'NEW',
+  //   },
+  //   role: {
+  //     'manager': 'руководитель',
+  //     'repr_found': 'представитель фонда',
+  //   },
+  // },
 ]
 
 export default _nav

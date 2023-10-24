@@ -82,15 +82,15 @@ export const PersonalDashboard = ({ myActivityStat }) => {
                         <CCol sm={4}>
                             <div className="border-start border-start-4 border-start-danger py-1 px-3 mb-3">
                                 <div className="text-medium-emphasis small">{myActivityStat.activity_unit_label}</div>
-                                <div className="fs-5 fw-semibold">17 {myActivityStat.activity_unit}</div>
+                                <div className="fs-5 fw-semibold">{myActivityStat.activity_unit}</div>
                             </div>
                         </CCol>
-                        {/* <CCol sm={4}>
+                        <CCol sm={4}>
                             <div className="border-start border-start-4 border-start-danger py-1 px-3 mb-3">
                                 <div className="text-medium-emphasis small">Баллов</div>
                                 <div className="fs-5 fw-semibold">{myActivityStat.sum_cost_event_in_units}</div>
                             </div>
-                        </CCol> */}
+                        </CCol>
                     </CRow>
 
                     <hr className="mt-0" />
