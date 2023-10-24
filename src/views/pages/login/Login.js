@@ -49,27 +49,24 @@ const Login = (props) => {
   };
 
   // Если авторизация прошла успешно, то устанавливаем cookie и переходим в мой профиль
-  const setToken = (access_token, refresh_token = null, username = null) => {
+  const setToken = async (access_token, refresh_token = null, username = null) => {
     // alert(`${access_token} ${refresh_token} ${username}`)
     setCookie("access", access_token, { path: '/' });
     setCookie("refresh", refresh_token, { path: '/' });
     setCookie("username", username, { path: '/' });
+    return true;
   };
 
 
-  const getToken = (username, password) => {
-    // можно перевести на JWT при желании. 
+  const getToken = async (username, password) => {
     // В рамках проекта используется обычный токен
     const data = { "username": username, "password": password }
-    axios
-      .post(`${startUrlApi}/api-token-auth/`, data)
-      .then((response) => {
-        setToken(response.data["token"], response.data["refresh"], username);
-        setTimeout(() => {
-          navigate("/profile/", { replace: true });
-          window.location.reload();
-        }, 1000)
+    const a = await axios.post(`${startUrlApi}/api-token-auth/`, data).then((response) => {
+        const t = setToken(response.data["token"], response.data["refresh"], username);
       }).catch(() => alert("Введён неверный логин или пароль!"));
+    console.log('test')
+    navigate("/profile/", { replace: true });
+    window.location.reload();
   };
 
 
