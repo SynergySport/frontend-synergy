@@ -87,6 +87,7 @@ class App extends Component {
         response => {
           console.log(response.data[0]);
           this.setState({ "userData": response.data[0] })
+          this.getTokenFromCookies();
         }
       )
       .catch(error => {
@@ -111,7 +112,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getTokenFromCookies();
+    
     this.getUser('');
   }
 
