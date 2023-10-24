@@ -162,7 +162,7 @@ const Rating = (props) => { // настройки приложения
                     <CRow className='margin-top'>
                         {
                             myActivityStatList.map((item) => <div>
-                                <h1>{item.user_data.first_name} {item.user_data.last_name}  Баллов: {item.user_aggregate.total}</h1>
+                                <div><h1>{item.user_data.first_name} {item.user_data.last_name}  Баллов: {item.user_aggregate.total}</h1></div>
                                 {item.result.map(result => <div>
                                     <PersonalDashboard myActivityStat={result} />
                                 </div>)}
